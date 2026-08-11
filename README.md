@@ -1,4 +1,4 @@
 # Laboratorios
-Lab Estructuras
+Labs de Estructuras
 Jose Daniel Brenes Campos
 Marcos Alvarado
