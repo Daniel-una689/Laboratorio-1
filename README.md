@@ -1,6 +1,5 @@
 # Laboratorios
 Labs de Estructuras
 # **Integrantes**
-Jose Daniel Brenes Campos 
-#
+Jose Daniel Brenes Campos y
 Marcos Alvarado
