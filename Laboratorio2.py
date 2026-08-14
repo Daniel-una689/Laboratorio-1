@@ -141,12 +141,12 @@ if __name__ == "__main__":
     #print(f"Minimo: {lista.minimo()}")
     #print(f"Maximo: {lista.maximo()}")
 
-    try:
-        with open("Reporte.txt", "w") as archivo:
-            archivo.write("====================================\n")
-            archivo.write("    REPORTE DE TEMPERATURAS\n")
-            archivo.write("====================================\n\n")
-            archivo.write(
+   
+    with open("Reporte.txt", "w") as archivo:
+        archivo.write("====================================\n")
+        archivo.write("    REPORTE DE TEMPERATURAS\n")
+        archivo.write("====================================\n\n")
+        archivo.write(
             "Cantidad de elementos dentro del archivo: "
             + str(lista.cantidadElementos())
             + "\n" + "Promedio de Temperaturas: "
@@ -157,11 +157,5 @@ if __name__ == "__main__":
 
         )
 
-    except FileNotFoundError:
-        print("Error: no se pudo crear el archivo Reporte.txt.")
-        exit()
     
-    except ValueError:
-        print("Error: no se pudo escribir en el archivo Reporte.txt.")
-        exit()
     
