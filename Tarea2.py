@@ -150,8 +150,8 @@ if __name__ == "__main__":
             "Cantidad de elementos dentro del archivo: "
             + str(lista.cantidadElementos())
             + "\n" + "Promedio de Temperaturas: "
-            + str(lista.promedio()) + "\n" + "Mínimo: "
-            + str(lista.minimo()) + "\n" + "Máximo: "
+            + str(lista.promedio()) + "\n" + "Minimo: "
+            + str(lista.minimo()) + "\n" + "Maximo: "
             + str(lista.maximo()) + "\n" + "Reporte hecho por Marcos Alvarado y Daniel Brenes\n"
             + "====================================\n"
 
