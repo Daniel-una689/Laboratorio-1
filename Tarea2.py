@@ -38,7 +38,8 @@ class LinkedList:
         while current is not None:
             print(current.valor, end="->")
             current = current.siguiente
-            print("None")
+            if current is None:
+                print("None")
         print()
 
     def cantidadElementos(self):
@@ -114,17 +115,16 @@ class LinkedList:
 
 if __name__ == "__main__":
 
-# Crear la lista doblemente enlazada
     lista = LinkedList()
     try:
         with open("datos.txt", "r") as archivo:
             for linea in archivo:
-                linea = linea.strip() # Eliminar espacios en blanco
-                # Evitar líneas vacías
+                linea = linea.strip()
                 if linea != "":
                     valor = int(linea)
-                    # Insertar el valor en la lista
                     lista.insertarAlInicio(valor)
+
+                    # se imprime dentro del for como tú quieres
                     lista.imprimirAdelante()
                     print(f"Cantidad de elementos: {lista.cantidadElementos()}")
 
@@ -135,3 +135,10 @@ if __name__ == "__main__":
     except ValueError:
         print("Error: el archivo contiene un dato que no es entero.")
         exit()
+
+    # Aqui van las estadisticas, despues de leer todo
+    print(f"Promedio: {lista.promedio()}")
+    print(f"Minimo: {lista.minimo()}")
+    print(f"Maximo: {lista.maximo()}")
+
+    
