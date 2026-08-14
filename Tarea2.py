@@ -141,4 +141,20 @@ if __name__ == "__main__":
     print(f"Minimo: {lista.minimo()}")
     print(f"Maximo: {lista.maximo()}")
 
+
+    with open("Reporte.txt", "w") as archivo:
+            archivo.write("====================================\n")
+            archivo.write("    REPORTE DE TEMPERATURAS\n")
+            archivo.write("====================================\n\n")
+            archivo.write(
+            "Cantidad de elementos dentro del archivo: "
+            + str(lista.cantidadElementos())
+            + "\n" + "Promedio de Temperaturas: "
+            + str(lista.promedio()) + "\n" + "Mínimo: "
+            + str(lista.minimo()) + "\n" + "Máximo: "
+            + str(lista.maximo()) + "\n" + "Reporte hecho por Marcos Alvarado y Daniel Brenes\n"
+            + "====================================\n"
+
+        )
+
     
