@@ -2,6 +2,9 @@
 
 
 
+from ast import Not
+
+
 class Node:
     def __init__(self, valor):
         self.valor = valor
@@ -29,12 +32,14 @@ class LinkedList:
 
         self.size += 1
 
+
     def imprimirAdelante(self):
-        current = self.head
-        while current:
-            print(current.valor, end=" -> ")
+        current =self.head
+        while current is not None:
+            print(current.valor, end="->")
             current = current.siguiente
-        print("None")
+            print("None")
+        print()
 
     def cantidadElementos(self):
         return self.size
@@ -55,22 +60,60 @@ class LinkedList:
         current = self.head
 
         #variable que nos ayudara a sumar los valores dentro de la lista
-        total= 0
+        total= 0.0
 
         while current is not None:
             total += current.valor
             current = current.siguiente
 
-        return total / self.size
+        return float(total / self.size)
+    #deberia de devolver el promedio de los valores en float
 
 
 
+    def minimo(self):
+        #lo que queremos hacer con este metodo es recorrer toda la lista y obtener el valor minimo dentro de la lista
+
+        if self.vacia():
+            print("La lista esta vacia")
+            return None
+
+        current = self.head
+        minimo = current.valor
+
+        while current is not None:
+            if current.valor < minimo:
+                minimo = current.valor
+                current = current.siguiente
+            else:
+                current = current.siguiente
+
+        return minimo
 
 
+    #agregamos un metodo que nos ayude a calcular el masximo valor dentro de la lista
 
+    def maximo(self):
+        if self.vacia():
+            print("La lista estas vacia")
+
+        #variable que nos ayude a recorrer la lista y otra para el maximo 
+        current = self.head
+        maximo = current.valor
+
+        while current is not None:
+            if current.valor > maximo:
+                maximo = current.valor
+                current = current.siguiente
+            else:
+                current = current.siguiente
+
+        return maximo
+    
 
 
 if __name__ == "__main__":
+
 # Crear la lista doblemente enlazada
     lista = LinkedList()
     try:
