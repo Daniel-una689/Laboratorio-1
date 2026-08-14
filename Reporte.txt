@@ -4,7 +4,7 @@
 
 Cantidad de elementos dentro del archivo: 99
 Promedio de Temperaturas: 26.161616161616163
-Mínimo: 18
-Máximo: 34
+Minimo: 18
+Maximo: 34
 Reporte hecho por Marcos Alvarado y Daniel Brenes
 ====================================

@@ -137,12 +137,12 @@ if __name__ == "__main__":
         exit()
 
     # Aqui van las estadisticas, despues de leer todo
-    print(f"Promedio: {lista.promedio()}")
-    print(f"Minimo: {lista.minimo()}")
-    print(f"Maximo: {lista.maximo()}")
+    #print(f"Promedio: {lista.promedio()}")
+    #print(f"Minimo: {lista.minimo()}")
+    #print(f"Maximo: {lista.maximo()}")
 
-
-    with open("Reporte.txt", "w") as archivo:
+    try:
+        with open("Reporte.txt", "w") as archivo:
             archivo.write("====================================\n")
             archivo.write("    REPORTE DE TEMPERATURAS\n")
             archivo.write("====================================\n\n")
@@ -157,4 +157,11 @@ if __name__ == "__main__":
 
         )
 
+    except FileNotFoundError:
+        print("Error: no se pudo crear el archivo Reporte.txt.")
+        exit()
+    
+    except ValueError:
+        print("Error: no se pudo escribir en el archivo Reporte.txt.")
+        exit()
     
