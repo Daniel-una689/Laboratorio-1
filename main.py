@@ -182,6 +182,7 @@ class simpleList:
     def listavacia(self):
         # Un método de consulta solo debe retornar el estado booleano
         return self.head is None
+    #return self.size == 0 # Alternativa: También podrías usar el tamaño para determinar si está vacía.
 
     def cantidadElemento(self, dato):
         c = 0
@@ -217,7 +218,7 @@ class simpleList:
         current = self.head
         index = 0
 
-        while current is not None and index < position:
+        while current is not None and index < position-1:
             current = current.next
             index += 1
 

@@ -30,12 +30,12 @@ class Product:
 
 
 
-    class NodeQueue:
+class NodeQueue:
         def __init__(self, valor: Product):
             self.valor = valor
             self.next = None
 
-        class Queue:
+class Queue:
             def __init__(self):
                 self.head = None
                 self.tail = None
@@ -62,7 +62,7 @@ class Product:
 
 
 
-    class Node:
+class Node:
         #el valor que se pasa es un objeto de la clase Product
         def __init__(self, valor: Product):
             self.valor = valor
@@ -70,7 +70,7 @@ class Product:
             self.previous = None
 
 
-    class Linkedlist:
+class Linkedlist:
         #esta clase tendra los metodos para agregar, eliminar y mostrar los productos
         def __init__(self):
             self.head = None
