@@ -42,6 +42,7 @@ class LinkedList:
                 print("None")
         print()
 
+
     def cantidadElementos(self):
         return self.size
 

@@ -36,10 +36,10 @@ class NodeQueue:
             self.next = None
 
 class Queue:
-            def __init__(self):
-                self.head = None
-                self.tail = None
-                self.size =0
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size =0
 
 
     def is_empty(self):
@@ -62,18 +62,18 @@ class Queue:
 
 class Node:
         #el valor que se pasa es un objeto de la clase Product
-        def __init__(self, valor: Product):
-            self.valor = valor
-            self.next = None
-            self.previous = None
+    def __init__(self, valor: Product):
+        self.valor = valor
+        self.next = None
+        self.previous = None
 
 
 class Linkedlist:
         #esta clase tendra los metodos para agregar, eliminar y mostrar los productos
-        def __init__(self):
-            self.head = None
-            self.tail = None
-            self.size =0
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size =0
 
 
     def empty(self):
@@ -210,16 +210,115 @@ class Linkedlist:
             print("La lista está vacía")
             return
         else:
+            # caso contrario, se recorre la lista y se agregan los productos con existencia 0 a la cola
             print("Generando cola de compras...")
             cola = Queue()
             current = self.head
-
+            # recorremos la lista y agregamos los productos con existencia 0 a la cola
             while current is not None:
                 if current.valor.existence == 0:
                     cola.enqueue(current.valor)
+                    # aqui se agrega el producto a la cola
                 current = current.next 
             return cola
 
+class NodoFrecuencia:
+    def __init__(self, pais):
+        self.valor = pais
+        self.next = None
+        self.frequency = 1  # Inicializamos la frecuencia en 1 al crear un nuevo nodo
+        # no se necesita un atributo previous ya que no se requiere recorrer hacia atrás en esta lista de frecuencia
+        # ni size ya que no se necesita conocer la cantidad de elementos en la lista de frecuencia
 
+class ListaFrecuencia:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size = 0
+        # se inicializa normal 
+
+    def empty(self):
+        return self.size == 0
+
+    def agregarPais(self, pais): # ya que es un pais lo que se busca añadir 
+        if self.empty():
+            nuevo_nodo = NodoFrecuencia(pais)
+            self.head = nuevo_nodo
+            self.tail = nuevo_nodo
+        else:
+            # si la lista no está vacía, se recorre la lista para ver si el país ya existe
+            current = self.head # se empieza a recorrer desde la cabeza de la lista
+            while current is not None:
+                if current.valor == pais: # si el pais que se ingresa ya existe en la lista, se incrementa su frecuencia y se retorna
+                    current.frequency += 1  # Incrementamos la frecuencia si el país ya existe
+                    return
+
+                # ya aqui se recorre la lista hasta el final, si no se encuentra el país, se agrega un nuevo nodo con el pais al final de la lista
+                current = current.next
+                if current is None:
+                    nuevo_nodo = NodoFrecuencia(pais)
+                    self.tail.next = nuevo_nodo
+                    self.tail = nuevo_nodo
+
+        self.size += 1
+        return ("Se agregó el país a la lista de frecuencia")
+
+
+# este si fue mas complejo, se tiene que recorrer la lista de productos y por cada producto, obtener su pais de origen, para agregarlo a la lista de frecuencias
+    def generarListaFrecuencia(self, linked_list): # es por esto que linked_list se pasa como parametro, para poder recorrerla y obtener los paises de origen de cada producto
+        if linked_list.empty():
+            print("La lista está vacía")
+            return
+        else:
+            frecuencias = ListaFrecuencia() # frecuencias es una instancia de la clase ListaFrecuencia, que se va a llenar con los paises de origen de los productos
+            current = linked_list.head # para recorrer la lista desde la cabeza 
+            while current is not None:
+                # se obtiene el país de origen del producto actual
+                pais = current.valor.origin_contry
+                # se agrega el país a la lista de frecuencias usando el método agregarPais
+                frecuencias.agregarPais(pais)
+                current = current.next
+            return frecuencias
+
+    def recorrerListaFrecuencia(self):
+        if self.empty():
+            print("La lista de frecuencia está vacía")
+            return
+
+        # si la lista no está vacía, se recorre la lista y se imprime el país y su frecuencia
+        else:
+            current = self.head
+            while current is not None:
+                print(f"País: {current.valor}, Frecuencia: {current.frequency}")
+                current = current.next
+
+
+    def paises_mas_frecuentes(self):
+        if self.empty():
+            print("La lista de frecuencia está vacía")
+            return 
+        else:
+            # aqui se recorre la lista de frecuencia para encontrar el país con la mayor frecuencia
+
+            #se inicializa todo para empezar
+            pais_mas_frecuente = None
+            max_frecuencia = 0
+            current = self.head
+            # recorremos la lista de frecuencia y se compara la frecuencia de cada país con la frecuencia máxima encontrada hasta el momento
+            while current is not None:
+                # para encontrar el pais con mayor frecuencia
+                if current.frequency > max_frecuencia: 
+                    max_frecuencia = current.frequency # actualiza la frecuencia máxima
+                    pais_mas_frecuente = current.valor # actualiza el país con mayor frecuencia, con la lista de frecuencias y con el metodo valor, se obtiene el país del nodo actual
+                current = current.next
+                # ahora solo se imrpime 
+            print(f"La frecuencia máxima del pais es: {pais_mas_frecuente}, con una frecuencia de: {max_frecuencia} veces") 
+
+
+
+
+
+
+    
 
 
