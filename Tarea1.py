@@ -222,6 +222,24 @@ class Linkedlist:
                 current = current.next 
             return cola
 
+    def generar_Rerporte(self):
+        if self.empty():
+            print("La lista de frecuencia está vacía")
+            return
+        else:
+            with open("reporte.txt", "w") as archivo:
+                archivo.write("-------Reporte de productos del supermercado---------\n")
+                archivo.write("-----------------------------------------------------\n")
+                total_general = 0
+                current = self.head
+                while current is not None:
+                    subtotal= current.valor.subtotal()
+                    archivo.write(f"Producto: {current.valor.name},id: {current.valor.id}, Subtotal: {subtotal}\n")
+                    total_general += subtotal
+                    current = current.next
+
+                archivo.write(f"Total general: {total_general}\n")
+
 class NodoFrecuencia:
     def __init__(self, pais):
         self.valor = pais
@@ -315,9 +333,38 @@ class ListaFrecuencia:
             print(f"La frecuencia máxima del pais es: {pais_mas_frecuente}, con una frecuencia de: {max_frecuencia} veces") 
 
 
+def main():
+    # Crear una lista enlazada de productos
+    lista_productos = Linkedlist()
 
+    # Agregar productos a la lista
+    lista_productos.agregarProducto(Product(1, "Manzanas", 1.5, "USA", 10))
+    lista_productos.agregarProducto(Product(2, "Bananas", 0.5, "Ecuador", 0))
+    lista_productos.agregarProducto(Product(3, "Naranjas", 2.0, "España", 5))
+    lista_productos.agregarProducto(Product(4, "Uvas", 3.0, "Chile", 0))
+    lista_productos.agregarProducto(Product(5, "Fresas", 2.5, "México", 8))
 
+    # Generar la cola de compras con productos sin existencia
+    cola_compras = lista_productos.generarColaDeCompras()
+    print("Productos en la cola de compras:")
+    current = cola_compras.head
+    while current is not None:
+        current.valor.Productprint()
+        current = current.next
 
+    # Generar la lista de frecuencia de países de origen
+    lista_frecuencia = ListaFrecuencia()
+    lista_frecuencia.generarListaFrecuencia(lista_productos)
+    print("\nLista de frecuencia de países de origen:")
+    lista_frecuencia.recorrerListaFrecuencia()
+    lista_frecuencia = lista_frecuencia.generarListaFrecuencia(lista_productos)
+
+    # Encontrar el país más frecuente
+    print("\nPaís más frecuente:")
+    lista_frecuencia.paises_mas_frecuentes()  
+
+if __name__ == "__main__":
+    main()
 
     
 
