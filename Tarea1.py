@@ -6,6 +6,8 @@
 #para la validacion del id
 #from unicodedata import name, numeric
 
+from collections import deque
+
 
 class Product:
     def __init__(self, id, name, price, origin_contry, existence):
@@ -54,7 +56,18 @@ class Queue:
             self.tail.next = new_node
             self.tail = new_node
         self.size += 1
-        return ("Se agrego el producto a la cola")
+
+
+
+    def printcola(self, producto: Product):
+            if self.is_empty():
+                print("La cola esta vacia")
+                return
+            else:
+                current = self.head
+                while current is not None:
+                    current.valor.Productprint()
+                    current = current.next
 
 
 
@@ -79,7 +92,7 @@ class Linkedlist:
     def empty(self):
         return self.size == 0
     
-    def agregarProducto(self, producto: Product):
+    def agregar_producto(self, producto: Product):
         new_node = Node(producto)
         if self.empty():
             self.head = Node(producto) #basicamente en caso de que el nodo este vacio, se le asigna el valor del producto al nodo
@@ -130,7 +143,8 @@ class Linkedlist:
             return ("se elimino el ultimo producto de la lista")
 
 
-    def deleteProduct(self,id):
+
+    def eliminar_producto(self,id):
         if self.empty():
             print("La lista esta vacia")
             return
@@ -170,7 +184,7 @@ class Linkedlist:
 
             
 
-    def search(self, id):
+    def buscar_producto(self, id):
         if self.empty():
             print("La lista esta vacia")
             return
@@ -222,7 +236,7 @@ class Linkedlist:
                 current = current.next 
             return cola
 
-    def generar_Rerporte(self):
+    def generar_Rerporte(self, nombrearch):
         if self.empty():
             print("La lista de frecuencia está vacía")
             return
@@ -239,6 +253,7 @@ class Linkedlist:
                     current = current.next
 
                 archivo.write(f"Total general: {total_general}\n")
+
 
 class NodoFrecuencia:
     def __init__(self, pais):
@@ -333,39 +348,114 @@ class ListaFrecuencia:
             print(f"La frecuencia máxima del pais es: {pais_mas_frecuente}, con una frecuencia de: {max_frecuencia} veces") 
 
 
+
+def solicitar_entero(mensaje):
+    while True:
+        try:
+            return int(input(mensaje))
+        except ValueError:
+            print("Entrada invalida. Debe ingresar un numero entero.")
+
+
+def solicitar_decimal(mensaje):
+    while True:
+        try:
+            return float(input(mensaje))
+        except ValueError:
+            print("Entrada invalida. Debe ingresar un numero.")
+
+
+def crear_producto_desde_input():
+    print("\nIngrese los datos del producto:")
+    product_id = solicitar_entero("ID: ")
+    name = input("Nombre: ").strip()
+    price = solicitar_decimal("Precio: ")
+    origin_country = input("Pais de origen: ").strip()
+    existence = solicitar_entero("Existencias: ")
+    return Product(product_id, name, price, origin_country, existence)
+
+
+def cargar_datos_prueba(lista_productos):
+    datos = [
+        Product(1, "Manzanas", 1.5, "USA", 10),
+        Product(2, "Bananas", 0.5, "Ecuador", 0),
+        Product(3, "Naranjas", 2.0, "Espana", 5),
+        Product(4, "Uvas", 3.0, "Chile", 0),
+        Product(5, "Fresas", 2.5, "Mexico", 8),
+    ]
+    for producto in datos:
+        lista_productos.agregar_producto(producto)
+    print("Datos de prueba cargados.")
+
+
+def mostrar_menu():
+    print("\n===== MENU SUPERMERCADO =====")
+    print("1. Ingresar producto")
+    print("2. Eliminar producto por ID")
+    print("3. Buscar producto por ID")
+    print("4. Mostrar lista de productos (recursivo)")
+    print("5. Generar cola de compras (existencia = 0)")
+    print("6. Mostrar frecuencia de paises de origen")
+    print("7. Generar reporte (archivo.txt)")
+    print("8. Cargar datos de prueba")
+    print("0. Salir")
+
+
 def main():
-    # Crear una lista enlazada de productos
     lista_productos = Linkedlist()
 
-    # Agregar productos a la lista
-    lista_productos.agregarProducto(Product(1, "Manzanas", 1.5, "USA", 10))
-    lista_productos.agregarProducto(Product(2, "Bananas", 0.5, "Ecuador", 0))
-    lista_productos.agregarProducto(Product(3, "Naranjas", 2.0, "España", 5))
-    lista_productos.agregarProducto(Product(4, "Uvas", 3.0, "Chile", 0))
-    lista_productos.agregarProducto(Product(5, "Fresas", 2.5, "México", 8))
+    while True:
+        mostrar_menu()
+        opcion = input("Seleccione una opcion: ").strip()
 
-    # Generar la cola de compras con productos sin existencia
-    cola_compras = lista_productos.generarColaDeCompras()
-    print("Productos en la cola de compras:")
-    current = cola_compras.head
-    while current is not None:
-        current.valor.Productprint()
-        current = current.next
+        if opcion == "1":
+            producto = crear_producto_desde_input()
+            lista_productos.agregar_producto(producto)
 
-    # Generar la lista de frecuencia de países de origen
-    lista_frecuencia = ListaFrecuencia()
-    lista_frecuencia.generarListaFrecuencia(lista_productos)
-    print("\nLista de frecuencia de países de origen:")
-    lista_frecuencia.recorrerListaFrecuencia()
-    lista_frecuencia = lista_frecuencia.generarListaFrecuencia(lista_productos)
+        elif opcion == "2":
+            product_id = solicitar_entero("Ingrese el ID del producto a eliminar: ")
+            lista_productos.eliminar_producto(product_id)
 
-    # Encontrar el país más frecuente
-    print("\nPaís más frecuente:")
-    lista_frecuencia.paises_mas_frecuentes()  
+        elif opcion == "3":
+            product_id = solicitar_entero("Ingrese el ID del producto a buscar: ")
+            producto = lista_productos.buscar_producto(product_id)
+            if producto is None:
+                print(f"No se encontro un producto con ID {product_id}.")
+            else:
+                print("Producto encontrado:")
+                producto.Productprint()
+
+        elif opcion == "4":
+            lista_productos.printRecursive(lista_productos.head)
+
+        elif opcion == "5":
+            cola = lista_productos.generarColaDeCompras()
+            cola.printcola(cola.head)
+
+        elif opcion == "6":
+            frecuencias = ListaFrecuencia().generarListaFrecuencia(lista_productos)
+            frecuencias.recorrerListaFrecuencia()
+            mayor = frecuencias.paises_mas_frecuentes() 
+            if mayor is not None:
+               print("El país con mayor frecuencia es:", mayor, "con una frecuencia de:", frecuencias.paises_mas_frecuentes())
+
+        elif opcion == "7":
+            lista_productos.generar_Rerporte("archivo.txt")
+
+        elif opcion == "8":
+            cargar_datos_prueba(lista_productos)
+
+        elif opcion == "0":
+            print("Saliendo del programa...")
+            break
+
+        else:
+            print("Opcion invalida. Intente de nuevo.")
+
 
 if __name__ == "__main__":
     main()
 
-    
+
 
 
