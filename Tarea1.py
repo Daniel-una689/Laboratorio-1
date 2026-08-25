@@ -59,7 +59,7 @@ class Queue:
 
 
 
-    def printcola(self, producto: Product):
+    def printcola(self):
             if self.is_empty():
                 print("La cola esta vacia")
                 return
@@ -236,12 +236,12 @@ class Linkedlist:
                 current = current.next 
             return cola
 
-    def generar_Rerporte(self, nombrearch):
+    def generar_Reporte(self, nombrearch):
         if self.empty():
             print("La lista de frecuencia está vacía")
             return
         else:
-            with open("reporte.txt", "w") as archivo:
+            with open(nombrearch, "w") as archivo:
                 archivo.write("-------Reporte de productos del supermercado---------\n")
                 archivo.write("-----------------------------------------------------\n")
                 total_general = 0
@@ -344,8 +344,9 @@ class ListaFrecuencia:
                     max_frecuencia = current.frequency # actualiza la frecuencia máxima
                     pais_mas_frecuente = current.valor # actualiza el país con mayor frecuencia, con la lista de frecuencias y con el metodo valor, se obtiene el país del nodo actual
                 current = current.next
-                # ahora solo se imrpime 
-            print(f"La frecuencia máxima del pais es: {pais_mas_frecuente}, con una frecuencia de: {max_frecuencia} veces") 
+                # ahora solo se imrpime
+            print(f"La frecuencia máxima del pais es: {pais_mas_frecuente}, con una frecuencia de: {max_frecuencia} veces")
+            return pais_mas_frecuente, max_frecuencia
 
 
 
@@ -430,17 +431,18 @@ def main():
 
         elif opcion == "5":
             cola = lista_productos.generarColaDeCompras()
-            cola.printcola(cola.head)
+            cola.printcola()
 
         elif opcion == "6":
             frecuencias = ListaFrecuencia().generarListaFrecuencia(lista_productos)
             frecuencias.recorrerListaFrecuencia()
-            mayor = frecuencias.paises_mas_frecuentes() 
-            if mayor is not None:
-               print("El país con mayor frecuencia es:", mayor, "con una frecuencia de:", frecuencias.paises_mas_frecuentes())
+            resultado = frecuencias.paises_mas_frecuentes()
+            if resultado is not None:
+                pais, frecuencia = resultado
+                print("El país con mayor frecuencia es:", pais, "con una frecuencia de:", frecuencia)
 
         elif opcion == "7":
-            lista_productos.generar_Rerporte("archivo.txt")
+            lista_productos.generar_Reporte("archivo.txt")
 
         elif opcion == "8":
             cargar_datos_prueba(lista_productos)
