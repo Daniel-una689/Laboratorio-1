@@ -201,7 +201,59 @@ class listaDobleEnlazada:
         return ("El valor eliminado es:" + str(valor_eliminado) +  (",el tamano de la lista es de: " + str(self.size)))
         
 
-        
+    def proemedio(self):
+
+        if self.vacia():
+            print("La lista esta vacia")
+            return 0
+
+        current = self.head
+
+        total = 0.0
+
+        while current is not None:
+            total +=current.valor
+            current = current.siguiente
+
+        return float(total / self.size)
+
+
+
+    def max(self):
+        if self.vacia():
+            print("La lista esta vacia")
+            return None
+
+        current = self.head
+
+        maximo = current.valor
+
+        while current is not None:
+            if current.valor > maximo:
+                maximo = current.valor
+            current = current.siguiente
+
+        return maximo
+
+
+
+    def min(self):
+        if self.vacia():
+            print("la lista esta vacia")
+            return
+
+        current = self.head
+
+        min = current.valor
+
+
+        while current is not None:
+            if current.valor < min:
+                min = current.valor
+            current = current.siguiente
+
+        return min
+
 
 
 
