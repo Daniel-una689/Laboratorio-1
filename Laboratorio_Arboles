@@ -3,12 +3,6 @@
 
 #Comprobacion de la correcta funcion del la lectura y escritura del los archivos catalogo, y movimientos
 
-
-
-
-
-
-
 class NodoLibro:
     def __init__(self, codigo, titulo, disponibles):
         self.codigo = codigo
@@ -142,13 +136,15 @@ if __name__ == "__main__":
 
 
     print("Funcionamiento correcto del programa")
-raiz = cargar_catalogo('catalogo_libros.txt')
-print('Raíz:', raiz.codigo)  # 410
+    raiz = cargar_catalogo('catalogo_libros.txt')
+    print('Raíz:', raiz.codigo)  # 410
 
-print('Libro 330:', buscar(raiz, 330).titulo)
-print('Código 999 registrado:', buscar(raiz, 999) is not None)
-for libro in listado_inorden(raiz):
-    print(libro)
+    print('Libro 330:', buscar(raiz, 330).titulo)
+    print('Disponibles del libro 330:', buscar(raiz, 330).disponibles)
+    print('Código 999 registrado:', buscar(raiz, 999) is not None)
+    print('Listado inorden:')
+    for libro in listado_inorden(raiz):
+        print(libro)
 
 
 
